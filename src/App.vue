@@ -1,32 +1,88 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
+  <div id="#app">
+    <topbar></topbar>
+
+    <main>
+      <transition :name="transitionName" mode="out-in" appear>
+        <keep-alive>
+          <router-view></router-view>
+        </keep-alive>
+      </transition>
+    </main>
   </div>
 </template>
 
+<script>
+import Topbar from "./components/Topbar";
+
+export default {
+  components: {
+    Topbar,
+  },
+
+  computed: {
+    transitionName() {
+      return this.$route.path === "/" ? "slide-right" : "slide-left";
+    },
+  },
+};
+</script>
+
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+@import "./assets/styles/style.scss";
+@import "@/assets/styles/milligram.scss";
+
+main {
+  padding: 20px 20px 20px 20px;
 }
 
-#nav {
-  padding: 30px;
+// Animations
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+.scale-enter-active {
+  animation: scale-in 0.3s;
+}
+.scale-leave-active {
+  animation: scale-out 0.3s;
+}
+@keyframes scale-in {
+  0% {
+    transform: scale(0);
   }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes scale-out {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+
+.slide-left-enter-active {
+  transition: all 0.3s;
+}
+.slide-left-enter {
+  transform: translateX(50px);
+  opacity: 0;
+}
+
+.slide-right-enter-active {
+  transition: all 0.3s;
+}
+.slide-right-enter {
+  transform: translateX(-50px);
+  opacity: 0;
 }
 </style>
