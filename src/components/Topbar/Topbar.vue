@@ -8,8 +8,8 @@
       </div>
 
       <div class="column align-right">
-        <router-link to="/" exact>Play</router-link>
-        <router-link to="/leaderboard">Leaderboards</router-link>
+        <router-link to="/" exact>开始</router-link>
+        <router-link to="/leaderboard">排行榜</router-link>
       </div>
     </div>
   </div>
@@ -22,7 +22,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "../../assets/styles/style";
 #topbar {
   background-color: #fff;
   padding: 20px;

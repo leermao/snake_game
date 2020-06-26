@@ -1,26 +1,13 @@
 <template>
   <transition name="fade">
     <div class="leaderboard align-center">
-      <h1>Leaderboard</h1>
+      <h1>排行榜</h1>
 
-      <table v-if="scores.length > 0">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Date</th>
-            <th>Score</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(scoreObj, index) in scores" :key="index">
-            <td>{{ index + 1 }}</td>
-            <td>{{ formattedDate(scoreObj.date) }}</td>
-            <td>{{ scoreObj.score }}</td>
-          </tr>
-        </tbody>
-      </table>
+      <div v-if="scores.length > 0">
+        <Table :columns="columns" :data="scores"></Table>
+      </div>
 
-      <h2 v-else>No scores.<br />Let's play a few times!</h2>
+      <h2 v-else>暂无得分.<br />请开始游戏!</h2>
     </div>
   </transition>
 </template>
@@ -28,6 +15,30 @@
 <script>
 export default {
   name: "leaderboard",
+
+  data() {
+    return {
+      columns: [
+        {
+          type: "index",
+          width: 60,
+          align: "center",
+        },
+        {
+          title: "时间",
+          render: (h, cxt) => {
+            return h("div", {}, this.formattedDate(cxt.row.date));
+          },
+        },
+        {
+          title: "得分",
+          render: (h, cxt) => {
+            return h("div", {}, cxt.row.score);
+          },
+        },
+      ],
+    };
+  },
 
   computed: {
     scores() {
@@ -44,18 +55,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "../assets/styles/style.scss";
-@import "../assets/styles/milligram.scss";
-
 .leaderboard {
-  overflow: scroll;
-  max-height: 550px;
-
-  tbody {
-    td:last-child {
-      @include gradient-text($gradient-secondary);
-      font-weight: 700;
-    }
-  }
+  width: 100%;
 }
 </style>

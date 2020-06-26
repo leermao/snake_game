@@ -29,14 +29,9 @@ export default {
 </script>
 
 <style lang="scss">
-@import "./assets/styles/style.scss";
-@import "@/assets/styles/milligram.scss";
-
 main {
-  padding: 20px 20px 20px 20px;
+  padding: 20px;
 }
-
-// Animations
 
 .fade-enter-active,
 .fade-leave-active {

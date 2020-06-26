@@ -1,94 +1,104 @@
 <template>
   <div class="row">
-    <div class="column game">
-      <div class="greeting align-center" v-if="!gameStarted">
-        <h1>Welcome to Snake Game</h1>
-        <p>Push the button on the left to start!</p>
-      </div>
-
-      <div id="stage"></div>
-
-      <transition name="fade">
-        <div class="finished-game-popup shadow align-center" v-if="gamePaused">
-          <h4>Game Paused</h4>
-        </div>
-        <div
-          class="finished-game-popup shadow align-center"
-          v-if="lastGame.finished"
-        >
-          <h4>Game Over</h4>
-          <p>
-            Your score is<br /><span>{{ lastGame.lastScore }}</span>
-          </p>
-        </div>
-        <div class="finished-game-popup shadow align-center" v-if="gameWon">
-          <h4>You won!</h4>
-          <p>Congratulations!</p>
-          <p>
-            Your score is<br /><span>{{ lastGame.lastScore }}</span>
-          </p>
-        </div>
-      </transition>
-    </div>
-
-    <div class="column column-25 sidebar-wrapper">
-      <div class="sidebar align-center align-items-center">
-        <h2>Score: <span id="score"></span></h2>
-
-        <button v-on:click="startGame">Start</button><br />
-        <transition name="scale">
-          <div v-if="gameStarted && !lastGame.finished">
-            <button v-on:click="pauseGame" v-if="isPlaying">Pause</button>
-            <button v-on:click="resumeGame" v-if="!isPlaying">Resume</button>
+    <Row :gutter="5" style="width: 100%" type="flex" justify="center">
+      <Col span="14">
+        <div class="column game">
+          <div class="greeting align-center" v-if="!gameStarted">
+            <h1>欢迎开始贪吃蛇</h1>
+            <p>请按下开始键</p>
           </div>
-        </transition>
 
-        <h2>Settings</h2>
-        <label for="difficulty">Difficulty {{ difficulty }}</label>
-        <input
-          id="difficulty"
-          type="range"
-          min="5"
-          max="50"
-          v-model="difficulty"
-        />
+          <div id="stage"></div>
 
-        <h2>Controls</h2>
-        <p class="instruction">
-          Use arrow buttons or your keyboard to control the snake
-        </p>
-        <div class="controls">
-          <div class="row">
-            <div class="column align-center">
-              <img
-                src="@/assets/img/Up.png"
-                :class="{ pressed: isUpButtonPressed }"
-                v-on:click="buttonPressed(38)"
-              />
+          <transition name="fade">
+            <div
+              class="finished-game-popup shadow align-center"
+              v-if="gamePaused"
+            >
+              <h4>游戏暂停</h4>
+            </div>
+            <div
+              class="finished-game-popup shadow align-center"
+              v-if="lastGame.finished"
+            >
+              <h4>游戏结束</h4>
+              <p>
+                您的得分是<br /><span>{{ lastGame.lastScore }}</span>
+              </p>
+            </div>
+            <div class="finished-game-popup shadow align-center" v-if="gameWon">
+              <h4>你赢了!</h4>
+              <p>
+                您的得分是<br /><span>{{ lastGame.lastScore }}</span>
+              </p>
+            </div>
+          </transition>
+        </div>
+      </Col>
+
+      <Col span="6">
+        <div class="column sidebar-wrapper">
+          <div class="sidebar align-center align-items-center">
+            <h2>得分: <span id="score">0</span></h2>
+
+            <button @click="startGame">开始</button><br />
+            <transition name="scale">
+              <div
+                v-if="gameStarted && !lastGame.finished"
+                style="margin-top: 5px"
+              >
+                <button @click="pauseGame" v-if="isPlaying">暂停</button>
+                <button @click="resumeGame" v-if="!isPlaying">
+                  继续
+                </button>
+              </div>
+            </transition>
+
+            <h2>设置</h2>
+            <label for="difficulty">难度： {{ difficulty }}</label>
+            <Slider
+              id="difficulty"
+              :min="5"
+              :max="50"
+              v-model="difficulty"
+            ></Slider>
+
+            <h2>键位</h2>
+            <div class="controls">
+              <div class="row">
+                <div class="column align-center">
+                  <img
+                    src="@/assets/img/Up.png"
+                    :class="{ pressed: isUpButtonPressed }"
+                    @click="buttonPressed(38)"
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="column align-center">
+                  <img
+                    src="@/assets/img/Left.png"
+                    :class="{ pressed: isLeftButtonPressed }"
+                    @click="buttonPressed(37)"
+                  />
+                  <img
+                    src="@/assets/img/Down.png"
+                    :class="{ pressed: isDownButtonPressed }"
+                    style="margin:0 7px"
+                    @click="buttonPressed(40)"
+                  />
+                  <img
+                    src="@/assets/img/Right.png"
+                    :class="{ pressed: isRightButtonPressed }"
+                    @click="buttonPressed(39)"
+                  />
+                </div>
+              </div>
             </div>
           </div>
-          <div class="row">
-            <div class="column align-center">
-              <img
-                src="@/assets/img/Left.png"
-                :class="{ pressed: isLeftButtonPressed }"
-                v-on:click="buttonPressed(37)"
-              />
-              <img
-                src="@/assets/img/Down.png"
-                :class="{ pressed: isDownButtonPressed }"
-                v-on:click="buttonPressed(40)"
-              />
-              <img
-                src="@/assets/img/Right.png"
-                :class="{ pressed: isRightButtonPressed }"
-                v-on:click="buttonPressed(39)"
-              />
-            </div>
-          </div>
         </div>
-      </div>
-    </div>
+      </Col>
+    </Row>
   </div>
 </template>
 
@@ -197,14 +207,16 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../assets/styles/style.scss";
-@import "../assets/styles/milligram.scss";
-
 .game {
   position: relative;
+  height: 100%;
 
   .greeting {
-    margin-top: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
   }
 
   #stage {
@@ -239,7 +251,8 @@ export default {
 }
 
 .column.sidebar-wrapper {
-  padding-left: 20px;
+  padding: 20px 10px;
+  background: #fff;
 
   .sidebar {
     height: 100%;
