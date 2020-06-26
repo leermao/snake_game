@@ -251,7 +251,7 @@ export default {
 }
 
 .column.sidebar-wrapper {
-  padding: 20px 10px;
+  padding: 32px 10px;
   background: #fff;
 
   .sidebar {
@@ -263,10 +263,6 @@ export default {
       &:first-child {
         margin-top: 0;
       }
-    }
-
-    input[type="range"] {
-      margin-bottom: 0;
     }
 
     .instruction {

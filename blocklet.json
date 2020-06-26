@@ -1,0 +1,18 @@
+{
+  "name": "snake_game",
+  "description": "贪吃蛇小游戏",
+  "group": "static",
+  "color": "primary",
+  "hooks": {
+    "pre-deploy": "npm run build"
+  },
+  "public_url": "/",
+  "admin_url": "",
+  "config_url": "",
+  "doc_url": "",
+  "provider": "community",
+  "main": "dist",
+  "version": "0.1.1",
+  "keywords": [],
+  "author": ""
+}

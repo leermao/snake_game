@@ -120,32 +120,6 @@ class Food {
   placeFood() {
     this.x = Math.floor(Math.random() * this.game.width);
     this.y = Math.floor(Math.random() * this.game.height);
-
-    // Not to place food under snake
-    // let futureFood = {
-    //     x: Math.floor(Math.random() * this.game.width),
-    //     y: Math.floor(Math.random() * this.game.height)
-    // };
-
-    // Check for the first food
-    // if (this.game.snake !== undefined) {
-    //     const parts = this.game.snake.parts;
-
-    //     parts.forEach((part) => {
-    //         if (futureFood.x === part.x && futureFood.y === part.y) {
-    //             console.log('food under snake');
-    //             futureFood.x = Math.floor(Math.random() * this.game.width);
-    //             futureFood.y = Math.floor(Math.random() * this.game.height);
-    //         } else {
-    //             this.x = futureFood.x;
-    //             this.y = futureFood.y;
-    //             // return;
-    //         }
-    //     });
-    // } else {
-    //     this.x = futureFood.x;
-    //     this.y = futureFood.y;
-    // }
   }
 
   update() {
@@ -167,7 +141,6 @@ class RenderGrid {
 
       for (let y = 0; y < this.game.height; y++) {
         let cell = document.createElement("div");
-        // BackCell is for preventing buggy background when animating
         let backCell = document.createElement("div");
 
         backCell.classList.add("back-cell");
@@ -263,7 +236,6 @@ class Game {
 
   finishLoop() {
     stopSnake();
-    // Property isPlaying = false
     return false;
   }
 
