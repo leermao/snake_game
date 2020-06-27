@@ -1,24 +1,35 @@
-# snake_game
+# 贪吃蛇小游戏
 
-## Project setup
+## 项目初始化
+
 ```
 yarn install
 ```
 
-### Compiles and hot-reloads for development
+### 启动开发服务
+
 ```
 yarn serve
 ```
 
-### Compiles and minifies for production
+### 编译生产环境
+
 ```
 yarn build
 ```
 
-### Lints and fixes files
+### 部署到 abtnode
+
 ```
-yarn lint
+abtnode deploy .
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### 主要功能
+
+#### 游戏首页
+
+![游戏首页](./screenshots/game.png)
+
+#### 排行榜
+
+![排行榜](./screenshots/leaderboard.png)

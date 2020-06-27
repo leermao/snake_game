@@ -3,7 +3,7 @@
     <div class="row">
       <div class="column align-right">
         <router-link to="/" exact>开始</router-link>
-        <!-- <router-link to="/leaderboard">排行榜</router-link> -->
+        <router-link to="/leaderboard">排行榜</router-link>
       </div>
     </div>
   </div>

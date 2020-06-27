@@ -9,8 +9,10 @@ export default {
     const scores = [];
 
     try {
-      for (let key in storage) {
-        scores.push(JSON.parse(storage.getItem(key)));
+      if (storage.length) {
+        for (let key in storage) {
+          scores.push(JSON.parse(storage.getItem(key)));
+        }
       }
     } catch (error) {
       console.warn(
@@ -18,6 +20,6 @@ export default {
       );
     }
 
-    return scores;
+    return (scores || []).filter(item => item);
   },
 };
