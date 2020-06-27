@@ -35,5 +35,6 @@ abtnode deploy .
 ![排行榜](./screenshots/leaderboard.png)
 
 ## todo
+- [ ] 游戏登录功能
 - [ ] 开始游戏需要花费游戏币
 - [ ] 当分值到一定值时给出相应的游戏币和奖章
