@@ -18,13 +18,13 @@ yarn serve
 yarn build
 ```
 
-### 部署到 abtnode
+### 部署
 
 ```
 abtnode deploy .
 ```
 
-### 主要功能
+## 主要功能
 
 #### 游戏首页
 
@@ -33,3 +33,7 @@ abtnode deploy .
 #### 排行榜
 
 ![排行榜](./screenshots/leaderboard.png)
+
+## todo
+* 开始游戏需要花费游戏币
+* 当分值到一定值时给出相应的游戏币和奖章
